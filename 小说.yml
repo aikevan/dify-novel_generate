@@ -1,0 +1,423 @@
+app:
+  description: ''
+  icon: 📚
+  icon_background: '#D5F5F6'
+  mode: workflow
+  name: 小说
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.5@fd6efd37c2a931911de8ab9ca3ba2da303bef146d45ee87ad896b04b36d09403
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1741920888720-source-1741921548306-target
+      source: '1741920888720'
+      sourceHandle: source
+      target: '1741921548306'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1741920888720-source-1741930224299-target
+      source: '1741920888720'
+      sourceHandle: source
+      target: '1741930224299'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1741921548306-source-1741930904328-target
+      source: '1741921548306'
+      sourceHandle: source
+      target: '1741930904328'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1741930224299-source-1741930904328-target
+      source: '1741930224299'
+      sourceHandle: source
+      target: '1741930904328'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1741930904328-source-1741932316701-target
+      source: '1741930904328'
+      sourceHandle: source
+      target: '1741932316701'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1741932316701-source-1741934110469-target
+      source: '1741932316701'
+      sourceHandle: source
+      target: '1741934110469'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1741934110469-source-1741935033893-target
+      source: '1741934110469'
+      sourceHandle: source
+      target: '1741935033893'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          label: 小说人物关系
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: novel_character_relation
+        - label: 小说名称
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: novel_name
+        - label: 小说大纲
+          max_length: 1000
+          options: []
+          required: true
+          type: paragraph
+          variable: novel_outline
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          label: 前置章节内容
+          max_length: 5
+          options: []
+          required: true
+          type: file-list
+          variable: precondition_chapter_list
+        - label: 当前章节名称
+          max_length: 100
+          options: []
+          required: true
+          type: text-input
+          variable: current_chapter_name
+        - label: 当前章节概述
+          max_length: 300
+          options: []
+          required: true
+          type: paragraph
+          variable: current_chapter_overview
+        - label: 小说类型
+          max_length: 48
+          options: []
+          required: true
+          type: text-input
+          variable: novel_type
+      height: 246
+      id: '1741920888720'
+      position:
+        x: -76.35534049480452
+        y: 300.4671662001737
+      positionAbsolute:
+        x: -76.35534049480452
+        y: 300.4671662001737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 读取人物关系
+        is_array_file: false
+        selected: false
+        title: 人物关系解析
+        type: document-extractor
+        variable_selector:
+        - '1741920888720'
+        - novel_character_relation
+      height: 120
+      id: '1741921548306'
+      position:
+        x: 375
+        y: 255
+      positionAbsolute:
+        x: 375
+        y: 255
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 读取前置章节内容，可以是任意章节，建议传递剧情相关章节内容
+        is_array_file: true
+        selected: false
+        title: 前置章节内容解析
+        type: document-extractor
+        variable_selector:
+        - '1741920888720'
+        - precondition_chapter_list
+      height: 136
+      id: '1741930224299'
+      position:
+        x: 375
+        y: 456
+      positionAbsolute:
+        x: 375
+        y: 456
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 将人物关系和前置章节的内容转换成大语言模型好理解的提示词
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: 5f6555d3-2dfc-450f-a89d-872e846caa30
+          role: system
+          text: "```xml\n<instruction>\n    <instructions>\n        请按照以下步骤将给定的小说人物关系和前置章节内容转换为适合大语言模型理解的提示词：\n\
+            \        \n        1. **解析人物关系**：\n            - 提取{{#1741921548306.text#}}中的角色名称及其相互关系（如血缘、敌对、盟友等）。\n\
+            \            - 用简洁的短句或列表形式描述关系，例如“A是B的父亲，与C有敌对矛盾”。\n        \n       \
+            \ 2. **处理前置章节内容**：\n            - 从{{#1741930224299.text#}}中提取关键事件或背景设定。\n\
+            \            - 按时间顺序或逻辑关联性总结章节内容，例如“第一章描述A与B的冲突，第二章揭示C的身份秘密”。\n      \
+            \  \n        3. **整合提示词**：\n            - 将人物关系与章节内容结合，用自然语言描述上下文。\n \
+            \           - 确保输出不包含任何XML/HTML标签，仅用纯文本分段。\n            - 示例格式：\n    \
+            \            “当前故事背景涉及以下角色关系：[人物关系总结]。此前的情节包括：[章节内容总结]。”\n        \n \
+            \       4. **格式要求**：\n            - 语言简洁，逻辑连贯，避免冗余描述。\n            - 角色名称和关键事件需显式标注。\n\
+            \    </instructions>\n<instruction>"
+        selected: false
+        title: 提示词转换
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 134
+      id: '1741930904328'
+      position:
+        x: 699
+        y: 388
+      positionAbsolute:
+        x: 699
+        y: 388
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据章节名称 概述 及前面的人物关系和前置章节内容进行生成当前章节内容
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-chat
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: d2649b4a-25bf-4277-855c-6281e7d96f10
+          role: system
+          text: "```xml\n<instruction>\n  <instructions>\n    1. 小说名称“{{#1741920888720.novel_name#}}”，将其作为整体创作的核心标识，确保后续内容始终围绕该名称的风格与基调展开。\n\
+            \    2. 依据提供的小说大纲“{{#1741920888720.novel_outline#}}”，分析故事的主线脉络与关键冲突，确保本章内容与整体框架紧密衔接。\n\
+            \    3. 将本章名称“{{#1741920888720.current_chapter_name#}}”作为创作锚点，提取其隐含的情绪或事件关键词，并贯穿全文。\n\
+            \    4. 根据本章概述“{{#1741920888720.current_chapter_overview#}}”扩展场景细节\n \
+            \   5. 整合人物关系时，需呈现至少一组复杂关系（如爱恨交织、利益同盟等），并自然融入前置章节的伏笔回收，人物关系和前置章节内容{{#1741930904328.text#}}。\n\
+            \    6. 最终章节内容需满足：\n       - 语言符合小说类型特征，类型“{{#1741920888720.novel_type#}}”\n\
+            \       - 段落间有连贯的时空逻辑\n       - 对话与叙述比例约为3:7\n    输出纯文字内容，禁止使用任何XML或Markdown格式标记，需以中文创作。\n\
+            \  </instructions>\n<instruction>"
+        - id: 7b63b1ca-c413-4515-a401-05acc58bdec9
+          role: user
+          text: 请生成一章不小于2000字的小说内容，当然字数不是强制的，看你对本章内容的理解。
+        selected: false
+        title: 生成章节内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 134
+      id: '1741932316701'
+      position:
+        x: 1028
+        y: 388
+      positionAbsolute:
+        x: 1028
+        y: 388
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-reasoner
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: cd821c2e-f0dc-4afb-b5e9-2d533a19abb8
+          role: system
+          text: "```xml\n<instruction>\n  <instructions>\n    1. 小说名称“{{#1741920888720.novel_name#}}”，将其作为整体创作的核心标识，确保后续内容始终围绕该名称的风格与基调展开。\n\
+            \    2. 依据提供的小说大纲“{{#1741920888720.novel_outline#}}”，分析故事的主线脉络与关键冲突，确保本章内容与整体框架紧密衔接。\n\
+            \    3. 将本章名称“{{#1741920888720.current_chapter_name#}}”作为创作锚点，提取其隐含的情绪或事件关键词，并贯穿全文。\n\
+            \    4. 根据本章概述“{{#1741920888720.current_chapter_overview#}}”扩展场景细节\n \
+            \   5. 整合人物关系时，需呈现至少一组复杂关系（如爱恨交织、利益同盟等），并自然融入前置章节的伏笔回收，人物关系和前置章节内容{{#1741930904328.text#}}。\n\
+            \    6. 最终章节内容需满足：\n       - 语言符合小说类型特征，类型“{{#1741920888720.novel_type#}}”\n\
+            \       - 段落间有连贯的时空逻辑\n       - 对话与叙述比例约为3:7\n    输出纯文字内容，禁止使用任何XML或Markdown格式标记，需以中文创作。\n\
+            \  </instructions>\n<instruction>"
+        - id: 1560f3cc-feb4-4a23-af0a-9631de1b590a
+          role: user
+          text: '请阅读{{#1741932316701.text#}}此章内容，
+
+            1. 并检查是否符合上面的要求，如果符合要求就不对内容进行改动，直接输入让你阅读的内容。
+
+            2. 不符合要求就对内容进一步改动。'
+        selected: false
+        title: 内容检查
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1741934110469'
+      position:
+        x: 1332
+        y: 388
+      positionAbsolute:
+        x: 1332
+        y: 388
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741934110469'
+          - text
+          variable: text
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1741935033893'
+      position:
+        x: 1636
+        y: 388
+      positionAbsolute:
+        x: 1636
+        y: 388
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 24.328866076739928
+      y: -1.092393922905444
+      zoom: 0.6973718331752019
